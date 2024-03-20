@@ -32,6 +32,16 @@ typedef unsigned long bitset_index_t;
 #define bitset_fill(name, set)\
     for(int i=0; i<bitset_size(name)/sizeof(unsigned long)/8; i++)\
         if(set)\
-            name[i+1]=1;\
+            name[i+1]=-1;\
         else\
             name[i+1]=0
+
+
+#define bitset_setbit(name, index, set)\
+    int num = name[index/(sizeof(unsigned long)*8)+1];\
+    if(set){\
+        num = num | ((uint)1 << index%(sizeof(unsigned long)*8));\
+    }\
+    printf("setbit: %ld\n", index/(sizeof(unsigned long)*8));\
+    name[index/(sizeof(unsigned long)*8)+1] = num
+
