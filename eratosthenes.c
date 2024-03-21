@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include <time.h>
 //maybe copy bitset.c here if inline doesnt work?
 
 #include "bitset.h"
@@ -15,14 +16,14 @@ extern inline unsigned long bitset_getbit(bitset_index_t *name, unsigned long in
 #define ARRAY_SIZE 666000000
 
 int main(){
-
+    clock_t start = clock();
     bitset_alloc(bit_array, ARRAY_SIZE);
-    bitset_fill(bit_array, true);
+    bitset_fill(bit_array, 1);
     unsigned long sqrtn = sqrt(ARRAY_SIZE);
     for(unsigned long i=2; i<=sqrtn; i++){
         if(bitset_getbit(bit_array, i)){
             for(unsigned long j=i*i; j<ARRAY_SIZE; j+=i){
-                bitset_setbit(bit_array, j, false);
+                bitset_setbit(bit_array, j, 0);
             }
         }
     }
@@ -38,5 +39,6 @@ int main(){
     }
     for(int i=0; i<10; i++)
         printf("%ld\n", last10[i]);
+    fprintf(stderr, "Time=%.3g\n", (double)(clock()-start)/CLOCKS_PER_SEC);
     return 0;
 }
