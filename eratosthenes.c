@@ -12,9 +12,10 @@ extern inline void bitset_setbit(bitset_index_t *name, unsigned long index, bool
 extern inline unsigned long bitset_getbit(bitset_index_t *name, unsigned long index);
 #endif
 
-#define ARRAY_SIZE 12000000
+#define ARRAY_SIZE 666000000
 
 int main(){
+
     bitset_alloc(bit_array, ARRAY_SIZE);
     bitset_fill(bit_array, true);
     unsigned long sqrtn = sqrt(ARRAY_SIZE);
@@ -25,10 +26,17 @@ int main(){
             }
         }
     }
-    for(unsigned long i=0; i<bitset_size(bit_array); i++){
-        if(bitset_getbit(bit_array, i))
-            printf("%ld, ", i);
+    unsigned long last10[10];
+    int count = 9;
+    for(unsigned long i=bitset_size(bit_array)-1; i>0; i--){
+        if(bitset_getbit(bit_array, i)){
+            last10[count] = i;
+            if(count==0)
+                break;
+            count--;
+        }
     }
-    printf("\n");
+    for(int i=0; i<10; i++)
+        printf("%ld\n", last10[i]);
     return 0;
 }
