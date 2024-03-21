@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include "bitset.c"
 #include "bitset.h"
 
 void main(){

@@ -17,10 +17,12 @@ typedef unsigned long bitset_index_t;
     assert(size > 0);                                \
     bitset_index_t* name = calloc(bitset_index_bits(size), sizeof(unsigned long));   \
     if(&name == NULL){\
-        fprintf(stderr, "bitset_alloc: Chyba alokace paměti");  /*TODO EXIT APP !!*/   \
+        fprintf(stderr, "bitset_alloc: Chyba alokace paměti");\
         exit(1);\
     }\
     name[0] = size
+
+#ifndef USE_INLINE
 
 #define bitset_free(name)\
     free(&name);
@@ -69,4 +71,53 @@ typedef unsigned long bitset_index_t;
     (num >> (bits - index % (sizeof(unsigned long) * 8))) & 1; \
 })
 
+#else
+    inline void bitset_free(bitset_index_t *name){
+        free(&name);
+    }
 
+    inline unsigned long bitset_size(bitset_index_t *name){
+        return name[0];
+    }
+
+    inline void bitset_fill(bitset_index_t *name, bool set){
+    for(int i=0; i<bitset_size(name)/sizeof(unsigned long)/8; i++)
+        if(set)
+            name[i+1]=-1;
+        else
+            name[i+1]=0;
+    }
+
+    inline void bitset_setbit(bitset_index_t *name, int index, bool set){
+        if(index>=bitset_size(name)){
+            fprintf(stderr, "Index out of range!\n");       /*THIS MUST BE DONE WITH ERROR_EXIT FROM ERROR.C */ 
+            exit(1);
+        }
+        unsigned long num = name[index/(sizeof(unsigned long)*8)+1];
+        int ind = index%(sizeof(unsigned long)*8);
+        uint64_t bitscompare;
+        if(set){
+            bitscompare = 1ULL << ind;
+            int bits = sizeof(unsigned long)*8;
+            num = num | bitscompare;
+        }
+        else{
+            bitscompare = ~(1ULL << ind);
+            int bits = sizeof(unsigned long)*8;
+            num = num & bitscompare;
+        }
+        int bbits = sizeof(unsigned long)*8;
+        name[index/(sizeof(unsigned long)*8)+1] = num;
+    }
+
+    inline unsigned long bitset_getbit(bitset_index_t *name, int index){
+        if(index>=bitset_size(name)){\
+            fprintf(stderr, "Index out of range!\n");       /*THIS MUST BE DONE WITH ERROR_EXIT FROM ERROR.C */ 
+            exit(1);
+        }
+        unsigned long num = name[index / (sizeof(unsigned long)*8)+1]; 
+        int bits = sizeof(unsigned long) * 8; 
+        (num >> (bits - index % (sizeof(unsigned long) * 8))) & 1;
+    }
+
+#endif
