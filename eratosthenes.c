@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-#include "eratosthenes.h"
 //maybe copy bitset.c here if inline doesnt work?
 
 #include "bitset.h"
@@ -13,21 +12,18 @@ extern inline void bitset_setbit(bitset_index_t *name, unsigned long index, bool
 extern inline unsigned long bitset_getbit(bitset_index_t *name, unsigned long index);
 #endif
 
-#define ARRAY_SIZE 100
+#define ARRAY_SIZE 12000000
 
 int main(){
-    bitset_create(bit_array, ARRAY_SIZE);
+    bitset_alloc(bit_array, ARRAY_SIZE);
     bitset_fill(bit_array, true);
-    int sqrtn = sqrt(ARRAY_SIZE);
-    for(int i=2; i<=sqrtn; i++){
-        printf("i=%d\n", i);
+    unsigned long sqrtn = sqrt(ARRAY_SIZE);
+    for(unsigned long i=2; i<=sqrtn; i++){
         if(bitset_getbit(bit_array, i)){
-            for(int j=i*i; j<ARRAY_SIZE; j+=i){
+            for(unsigned long j=i*i; j<ARRAY_SIZE; j+=i){
                 bitset_setbit(bit_array, j, false);
-                printf("%d, ", j);
             }
         }
-        printf("\n---\n");
     }
     for(unsigned long i=0; i<bitset_size(bit_array); i++){
         if(bitset_getbit(bit_array, i))

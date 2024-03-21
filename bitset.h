@@ -82,7 +82,7 @@ typedef unsigned long bitset_index_t;
             name[i+1]=0;
     }
 
-    inline void bitset_setbit(bitset_index_t *name, unsigned index, bool set){
+    inline void bitset_setbit(bitset_index_t *name, unsigned long index, bool set){
         if(index>=bitset_size(name)){
             fprintf(stderr, "Index out of range!\n");       /*THIS MUST BE DONE WITH ERROR_EXIT FROM ERROR.C */ 
             exit(1);
@@ -101,14 +101,10 @@ typedef unsigned long bitset_index_t;
         name[index/(sizeof(unsigned long)*8)+1] = num;
     }
 
-    inline unsigned long bitset_getbit(bitset_index_t *name, unsigned index){
-        if(index>=bitset_size(name)){\
-            fprintf(stderr, "Index out of range!\n");       /*THIS MUST BE DONE WITH ERROR_EXIT FROM ERROR.C */ 
-            exit(1);
-        }
-        unsigned long num = name[index / (sizeof(unsigned long)*8)+1]; 
-        int bits = sizeof(unsigned long) * 8; 
-        return (num >> (bits - index % (sizeof(unsigned long) * 8))) & 1;
+    inline unsigned long bitset_getbit(bitset_index_t *name, unsigned long index){
+        return (index>=bitset_size(name) && index<1) ? 
+        (fprintf(stderr, "Index out of range!\n"),0) : 
+        ((name[index / (sizeof(unsigned long) * 8)+1] >> (index % (sizeof(unsigned long) * 8))) & 1);
     }
 
 #endif
