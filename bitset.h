@@ -2,8 +2,8 @@
 #include <assert.h>
 #include <stdint.h>
 
-typedef struct {
-}bitset_t;
+/*typedef struct {
+}bitset_t;*/
 
 typedef unsigned long bitset_index_t;
 
@@ -58,15 +58,7 @@ typedef unsigned long bitset_index_t;
     } while (0)
 
 #define bitset_getbit(name, index)\
-    ({ \
-    if(index>=bitset_size(name)){\
-        fprintf(stderr, "Index out of range!\n");       /*THIS MUST BE DONE WITH ERROR_EXIT FROM ERROR.C */ \
-        exit(1);\
-    }\
-    unsigned long num = name[index / (sizeof(unsigned long)*8)+1]; \
-    int bits = sizeof(unsigned long) * 8; \
-    (num >> (bits - index % (sizeof(unsigned long) * 8))) & 1; \
-})
+    (index>=bitset_size(name)) ? fprintf(stderr, "Index out of range!\n"),1 : (name[index / (sizeof(unsigned long)*8)+1] >> (sizeof(unsigned long) * 8 - index % (sizeof(unsigned long) * 8))) & 1
 
 #else
 #ifndef BITSET_INCLUDE_ONCE
