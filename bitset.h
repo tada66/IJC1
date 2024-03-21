@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <assert.h>
+#include <stdint.h>
 
 typedef struct {
 }bitset_t;
@@ -38,10 +39,22 @@ typedef unsigned long bitset_index_t;
 
 
 #define bitset_setbit(name, index, set)\
-    int num = name[index/(sizeof(unsigned long)*8)+1];\
+    unsigned long num = name[index/(sizeof(unsigned long)*8)+1];\
+    int ind = index%(sizeof(unsigned long)*8);\
+    uint64_t bitscompare;\
     if(set){\
-        num = num | ((uint)1 << index%(sizeof(unsigned long)*8));\
+        bitscompare = 1ULL << ind;\
+        int bits = sizeof(unsigned long)*8;\
+        num = num | bitscompare;\
     }\
-    printf("setbit: %ld\n", index/(sizeof(unsigned long)*8));\
+    else{\
+        bitscompare = ~(1ULL << ind);\
+        int bits = sizeof(unsigned long)*8;\
+        num = num & bitscompare;\
+    }\
+    int bbits = sizeof(unsigned long)*8;\
     name[index/(sizeof(unsigned long)*8)+1] = num
+
+#define bitset_getbit(name, index)\
+
 
