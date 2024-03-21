@@ -2,8 +2,7 @@
 #include <assert.h>
 #include <stdint.h>
 
-/*typedef struct {
-}bitset_t;*/
+typedef unsigned long *bitset_t;
 
 typedef unsigned long bitset_index_t;
 
