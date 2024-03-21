@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include "eratosthenes.h"
+//maybe copy bitset.c here if inline doesnt work?
+
+#include "bitset.h"
+#ifdef USE_INLINE
+extern inline void bitset_free(bitset_index_t *name);
+extern inline unsigned long bitset_size(bitset_index_t *name);
+extern inline void bitset_fill(bitset_index_t *name, bool set);
+extern inline void bitset_setbit(bitset_index_t *name, unsigned long index, bool set);
+extern inline unsigned long bitset_getbit(bitset_index_t *name, unsigned long index);
+#endif
+
+#define ARRAY_SIZE 100
+
+int main(){
+    bitset_create(bit_array, ARRAY_SIZE);
+    bitset_fill(bit_array, true);
+    bitset_setbit(bit_array, 0, false);
+    for(unsigned long i=0; i<bitset_size(bit_array); i++){
+        printf("i=%ld, bs=%ld\n", i, bitset_getbit(bit_array, i));
+    }
+    int sqrtn = sqrt(ARRAY_SIZE);/*
+    for(int i=2; i<=sqrtn; i++){
+        printf("i=%d\n", i);
+        if(bitset_getbit(bit_array, i)){
+            for(int j=i*i; j<ARRAY_SIZE; j+=i){
+                bitset_setbit(bit_array, j, false);
+                printf("j=%d ", j);
+                printf("bitset=%ld\n", bitset_getbit(bit_array, j));
+                printf("\n");
+            }
+        }
+        printf("--------------------------\n\n");
+    }
+    for(unsigned long i=0; i<bitset_size(bit_array); i++){
+        if(bitset_getbit(bit_array, i))
+            printf("%ld, ", i);
+    }*/
+    printf("\n");
+    return 0;
+}

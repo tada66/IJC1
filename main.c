@@ -7,7 +7,7 @@
 #include "bitset.h"
 #endif
 
-int main(){
+int main(){ 
     bitset_create(cpole, 128);
     printf("Size of arr=%ld\n", sizeof(cpole)*8);
     printf("declared=%ld\n", bitset_size(cpole));
