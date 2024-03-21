@@ -1,16 +1,20 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
+#ifdef USE_INLINE
 #include "bitset.c"
+#else
 #include "bitset.h"
+#endif
 
-void main(){
+int main(){
     bitset_create(cpole, 128);
     printf("Size of arr=%ld\n", sizeof(cpole)*8);
     printf("declared=%ld\n", bitset_size(cpole));
     bitset_fill(cpole, true);
     bitset_setbit(cpole, 63, false);
     printf("getbit=%ld\n", bitset_getbit(cpole, 127));
-    for(int i=0; i<bitset_size(cpole)/sizeof(unsigned long)/8; i++){
+    for(unsigned i=0; i<bitset_size(cpole)/sizeof(unsigned long)/8; i++){
         printf("%ld, ", cpole[i+1]);
     }
     printf("\n");
@@ -30,4 +34,5 @@ void main(){
         printf("%ld, ", apole[i+1]);
     }
     printf("\n");*/
+    return 0;
 }
