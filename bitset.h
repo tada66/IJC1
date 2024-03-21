@@ -11,12 +11,10 @@ typedef unsigned long bitset_index_t;
 
 #define bitset_create(name,size)                            \
     static_assert(size > 0);                                \
-    printf("bitset_create: bytes=%ld\n", bitset_index_bits(size));               \
     bitset_index_t name[bitset_index_bits(size)]= {size}
 
 #define bitset_alloc(name, size)                            \
     assert(size > 0);                                \
-    printf("bitset_alloc: bytes=%ld\n", bitset_index_bits(size));               \
     bitset_index_t* name = calloc(bitset_index_bits(size), sizeof(unsigned long));   \
     if(&name == NULL){\
         fprintf(stderr, "bitset_alloc: Chyba alokace paměti");  /*TODO EXIT APP !!*/   \
@@ -37,9 +35,12 @@ typedef unsigned long bitset_index_t;
         else\
             name[i+1]=0
 
-
 #define bitset_setbit(name, index, set)\
     do{\
+    if(index>=bitset_size(name)){\
+        fprintf(stderr, "Index out of range!\n");       /*THIS MUST BE DONE WITH ERROR_EXIT FROM ERROR.C */ \
+        exit(1);\
+    }\
     unsigned long num = name[index/(sizeof(unsigned long)*8)+1];\
     int ind = index%(sizeof(unsigned long)*8);\
     uint64_t bitscompare;\
@@ -59,7 +60,11 @@ typedef unsigned long bitset_index_t;
 
 #define bitset_getbit(name, index)\
     ({ \
-    unsigned long num = name[index / (sizeof(unsigned long) * 8) + 1]; \
+    if(index>=bitset_size(name)){\
+        fprintf(stderr, "Index out of range!\n");       /*THIS MUST BE DONE WITH ERROR_EXIT FROM ERROR.C */ \
+        exit(1);\
+    }\
+    unsigned long num = name[index / (sizeof(unsigned long)*8)+1]; \
     int bits = sizeof(unsigned long) * 8; \
     (num >> (bits - index % (sizeof(unsigned long) * 8))) & 1; \
 })
