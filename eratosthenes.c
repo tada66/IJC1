@@ -18,27 +18,21 @@ extern inline unsigned long bitset_getbit(bitset_index_t *name, unsigned long in
 int main(){
     bitset_create(bit_array, ARRAY_SIZE);
     bitset_fill(bit_array, true);
-    bitset_setbit(bit_array, 0, false);
-    for(unsigned long i=0; i<bitset_size(bit_array); i++){
-        printf("i=%ld, bs=%ld\n", i, bitset_getbit(bit_array, i));
-    }
-    int sqrtn = sqrt(ARRAY_SIZE);/*
+    int sqrtn = sqrt(ARRAY_SIZE);
     for(int i=2; i<=sqrtn; i++){
         printf("i=%d\n", i);
         if(bitset_getbit(bit_array, i)){
             for(int j=i*i; j<ARRAY_SIZE; j+=i){
                 bitset_setbit(bit_array, j, false);
-                printf("j=%d ", j);
-                printf("bitset=%ld\n", bitset_getbit(bit_array, j));
-                printf("\n");
+                printf("%d, ", j);
             }
         }
-        printf("--------------------------\n\n");
+        printf("\n---\n");
     }
     for(unsigned long i=0; i<bitset_size(bit_array); i++){
         if(bitset_getbit(bit_array, i))
             printf("%ld, ", i);
-    }*/
+    }
     printf("\n");
     return 0;
 }

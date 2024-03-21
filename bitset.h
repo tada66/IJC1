@@ -54,29 +54,15 @@ typedef unsigned long bitset_index_t;
     }\
     else{\
         bitscompare = ~(1ULL << ind);\
-        printmebits(bitscompare);\
-        printmebits(num);\
         num = num & bitscompare;\
-        printmebits(num);\
     }\
     name[index/(sizeof(unsigned long)*8)+1] = num;\
-    } while (0)
-
-#define printmebits(numba)\
-({\
-    int blits = sizeof(unsigned long)*8;\
-    for(int i = 1; i <= blits; i++)\
-        printf("%ld", (numba >> (blits - i)) & 1);\
-    printf("\n");\
-})
-
-    
+    } while (0)    
 
 #define bitset_getbit(name, index)\
     (index>=bitset_size(name) && index<1) ? \
-    (printf("%ld Index out of range!\n", index),0) : \
-    (name[index/(sizeof(unsigned long)*8+1)] >> (index%(sizeof(unsigned long) * 8)) & 1));
-    //((name[index / (sizeof(unsigned long) * 8)+1] >> (sizeof(unsigned long) * 8 - 1 - (index % (sizeof(unsigned long) * 8)))) & 1)
+    (fprintf(stderr, "Index out of range!\n"),0) : \
+    ((name[index / (sizeof(unsigned long) * 8)+1] >> (index % (sizeof(unsigned long) * 8))) & 1)
 
 #else
 
