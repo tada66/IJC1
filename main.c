@@ -6,8 +6,9 @@ void main(){
     bitset_create(cpole, 128);
     printf("Size of arr=%ld\n", sizeof(cpole)*8);
     printf("declared=%ld\n", bitset_size(cpole));
-    bitset_fill(cpole, false);
-    bitset_setbit(cpole, 63, true);
+    bitset_fill(cpole, true);
+    bitset_setbit(cpole, 64, false);
+    printf("%ld\n", bitset_getbit(cpole, 64));
     for(int i=0; i<bitset_size(cpole)/sizeof(unsigned long)/8; i++){
         printf("%ld, ", cpole[i+1]);
     }

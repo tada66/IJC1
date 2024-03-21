@@ -39,6 +39,7 @@ typedef unsigned long bitset_index_t;
 
 
 #define bitset_setbit(name, index, set)\
+    do{\
     unsigned long num = name[index/(sizeof(unsigned long)*8)+1];\
     int ind = index%(sizeof(unsigned long)*8);\
     uint64_t bitscompare;\
@@ -53,8 +54,14 @@ typedef unsigned long bitset_index_t;
         num = num & bitscompare;\
     }\
     int bbits = sizeof(unsigned long)*8;\
-    name[index/(sizeof(unsigned long)*8)+1] = num
+    name[index/(sizeof(unsigned long)*8)+1] = num;\
+    } while (0)
 
 #define bitset_getbit(name, index)\
+    ({ \
+    unsigned long num = name[index / (sizeof(unsigned long) * 8) + 1]; \
+    int bits = sizeof(unsigned long) * 8; \
+    (num >> (bits - index % (sizeof(unsigned long) * 8))) & 1; \
+})
 
 
