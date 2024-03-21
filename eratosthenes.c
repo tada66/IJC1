@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "bitset.h"
 #ifdef USE_INLINE
@@ -12,7 +13,7 @@ extern inline unsigned long bitset_getbit(bitset_index_t *name, unsigned long in
 #endif
 
 void eratosthenes(bitset_t bit_array){
-    int size = bitset_size(bit_array);
+    unsigned long size = bitset_size(bit_array);
     unsigned long sqrtn = sqrt(size);
     for(unsigned long i=2; i<=sqrtn; i++){
         if(bitset_getbit(bit_array, i)){

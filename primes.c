@@ -26,6 +26,7 @@ int main(){
 
     bitset_alloc(bit_array, ARRAY_SIZE);
     bitset_fill(bit_array, 1);
+    printf("%ld", *bit_array);
     eratosthenes(bit_array);
     printerat(bit_array);
     
