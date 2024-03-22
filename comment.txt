@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+#include "error.c"
+//ja jsem komentar
+int main(int argc, char **argv){ "//ja nejsem komentar"
+    if(argc>2)/* TADY JE DALSI KOMENTAR
+        error_exit("Too many arguments!\n"); A TADY KONCI */
+    FILE *file;
+    if(argc==2)'/'/taky nejsem komentar
+        file = fopen(argv[1], "r");
+    else
+        file = stdin;// \
+    if(file==NULL)
+        error_exit("Cannot open file %s", argv[1]);
+    int state = 0;
+    int c;
+    while ((c=getc(file)) != EOF)

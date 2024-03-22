@@ -3,8 +3,8 @@
 # Autor: Tadeáš Horák, FIT
 # Přeloženo: gcc 11.4.0
 CC=gcc
-CFLAGS=-g -std=c11 -pedantic -Wall -Wextra -O2 -fsanitize=address
-LDFLAGS=-g -std=c11 -pedantic -Wall -Wextra -O2 -fsanitize=address
+CFLAGS=-g -std=c11 -pedantic -Wall -Wextra -O2
+LDFLAGS=-g -std=c11 -pedantic -Wall -Wextra -O2
 
 #SRCS = $(wildcard *.c)
 #OBJS = $(SRCS:.c=.o)
