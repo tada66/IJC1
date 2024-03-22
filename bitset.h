@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "error.h"
+
 typedef unsigned long *bitset_t;
 
 typedef unsigned long bitset_index_t;
@@ -42,10 +44,8 @@ typedef unsigned long bitset_index_t;
 
 #define bitset_setbit(name, index, set)\
     do{\
-    if(index>=bitset_size(name)){\
-        fprintf(stderr, "Index out of range!\n");       /*THIS MUST BE DONE WITH ERROR_EXIT FROM ERROR.C */ \
-        exit(1);\
-    }\
+    if(index>=bitset_size(name))\
+        error_exit("bitset_setbit: Index %lu mimo rozsah 0..%lu",(unsigned long)index, bitset_size(name)-1);\
     unsigned long num = name[index/(sizeof(unsigned long)*8)+1];\
     int ind = index%(sizeof(unsigned long)*8);\
     uint64_t bitscompare;\
@@ -62,7 +62,7 @@ typedef unsigned long bitset_index_t;
 
 #define bitset_getbit(name, index)\
     (index>=bitset_size(name)) ? \
-    (fprintf(stderr, "Index out of range!\n"),0) : \
+    (error_exit("bitset_getbit: Index %lu mimo rozsah 0..%lu",(unsigned long)index, bitset_size(name)-1),0) : \
     ((name[index / (sizeof(unsigned long) * 8)+1] >> (index % (sizeof(unsigned long) * 8))) & 1)
 
 #else

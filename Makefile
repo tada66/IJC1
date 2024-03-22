@@ -8,10 +8,10 @@ LDFLAGS=-g -std=c11 -pedantic -Wall -Wextra -lm -fsanitize=address
 
 all: primes primes-i
 
-primes: primes.o eratosthenes.o #error.o
+primes: primes.o eratosthenes.o error.o
 	$(CC) $(LDFLAGS) -o $@ $^
 
-primes-i: primes-i.o eratosthenes-i.o #error.o
+primes-i: primes-i.o eratosthenes-i.o error.o
 	$(CC) $(LDFLAGS) -DUSE_INLINE -o $@ $^
 
 primes-i.o: primes.c bitset.h eratosthenes.h
@@ -25,6 +25,9 @@ primes.o: primes.c bitset.h eratosthenes.h
 
 eratosthenes.o: eratosthenes.c eratosthenes.h bitset.h
 	$(CC) $(CFLAGS) -c -o $@ eratosthenes.c
+
+error.o: error.c error.h
+	$(CC) $(CFLAGS) -c -o $@ error.c
 
 # Linking
 #$(EXEC): $(OBJS)
