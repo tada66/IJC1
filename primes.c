@@ -1,7 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <time.h>
-#include "eratosthenes.c"
+#include "eratosthenes.h"
 
 #define ARRAY_SIZE 666000000
 #define PRINT_SIZE 10
@@ -23,10 +21,8 @@ void printerat(bitset_t bit_array){
 
 int main(){
     clock_t start = clock();
-
-    bitset_alloc(bit_array, ARRAY_SIZE);
+    bitset_create(bit_array, ARRAY_SIZE);
     bitset_fill(bit_array, 1);
-    printf("%ld", *bit_array);
     eratosthenes(bit_array);
     printerat(bit_array);
     

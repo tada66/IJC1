@@ -1,4 +1,5 @@
 #include "bitset.h"
+
 #ifdef USE_INLINE
 extern inline void bitset_free(bitset_index_t *name);
 extern inline unsigned long bitset_size(bitset_index_t *name);

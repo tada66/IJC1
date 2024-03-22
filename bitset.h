@@ -1,6 +1,8 @@
 #include <stdbool.h>
 #include <assert.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef unsigned long *bitset_t;
 
@@ -30,7 +32,7 @@ typedef unsigned long bitset_index_t;
     name[0]
 
 #define bitset_fill(name, set)\
-    for(unsigned i=0; i<bitset_size(name)/sizeof(unsigned long)/8+1; i++)\
+    for(unsigned i=0; i<(bitset_size(name)+sizeof(unsigned long)-1)/sizeof(unsigned long)/8; i++)\
     {\
         if(set)\
             name[i+1]=-1;\
@@ -59,7 +61,7 @@ typedef unsigned long bitset_index_t;
     } while (0)    
 
 #define bitset_getbit(name, index)\
-    (index>=bitset_size(name) && index<1) ? \
+    (index>=bitset_size(name)) ? \
     (fprintf(stderr, "Index out of range!\n"),0) : \
     ((name[index / (sizeof(unsigned long) * 8)+1] >> (index % (sizeof(unsigned long) * 8))) & 1)
 
