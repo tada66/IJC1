@@ -44,3 +44,8 @@ clean:
 run: all
 	ulimit -s 100000 && ./primes 
 	ulimit -s 100000 && ./primes-i
+	make clean
+
+zip: all
+	zip xhorakt00.zip *.c *.h Makefile
+	make clean
