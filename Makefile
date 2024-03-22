@@ -10,13 +10,19 @@ LDFLAGS=-g -std=c11 -pedantic -Wall -Wextra -O2
 #OBJS = $(SRCS:.c=.o)
 #EXEC = main
 
-all: primes primes-i
+all: primes primes-i no-comment
 
 primes: primes.o eratosthenes.o error.o
 	$(CC) $(LDFLAGS) -o $@ $^ -lm
 
 primes-i: primes-i.o eratosthenes-i.o error.o
 	$(CC) $(LDFLAGS) -DUSE_INLINE -o $@ $^ -lm
+
+no-comment: no-comment.o error.o
+	$(CC) $(LDFLAGS) -o $@ $^
+
+no-comment-o: no-comment.c
+	$(CC) $(CFLAGS) -c -o $@ no-comment.c
 
 primes-i.o: primes.c bitset.h eratosthenes.h
 	$(CC) $(CFLAGS) -DUSE_INLINE -c -o $@ primes.c
@@ -40,7 +46,7 @@ error.o: error.c error.h
 # Clean target
 .PHONY: clean
 clean:
-	rm *.o
+	rm -f *.o
 
 .PHONY: run
 run: all

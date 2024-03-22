@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "error.c"
+#include "error.h"
 
 int main(int argc, char **argv){
     if(argc>2)
