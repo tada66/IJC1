@@ -16,6 +16,7 @@ extern inline unsigned long bitset_getbit(bitset_index_t *name, unsigned long in
 
 
 void eratosthenes(bitset_t bit_array){
+    bitset_fill(bit_array, 1);
     unsigned long size = bitset_size(bit_array);
     unsigned long sqrtn = sqrt(size);
     for(unsigned long i=2; i<=sqrtn; i++){

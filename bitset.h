@@ -38,7 +38,7 @@ typedef unsigned long bitset_index_t;
     name[0]
 
 #define bitset_fill(name, set)\
-    for(unsigned i=0; i<(bitset_size(name)+sizeof(unsigned long)-1)/sizeof(unsigned long)/8; i++)\
+    for(unsigned i=0; i<(bitset_size(name)+(sizeof(unsigned long)*8)-1)/sizeof(unsigned long)/8; i++)\
     {\
         if(set)\
             name[i+1]=-1;\
@@ -80,7 +80,7 @@ typedef unsigned long bitset_index_t;
     }
 
     inline void bitset_fill(bitset_index_t *name, bool set){
-    for(unsigned i=0; i<bitset_size(name)/sizeof(unsigned long)/8; i++)
+    for(unsigned i=0; i<(bitset_size(name)+(sizeof(unsigned long)*8)-1)/sizeof(unsigned long)/8; i++)
         if(set)
             name[i+1]=-1;
         else

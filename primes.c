@@ -5,11 +5,11 @@
 #include <time.h>
 #include "eratosthenes.h"
 
-#define ARRAY_SIZE 666000000
+#define ARRAY_SIZE 13
 #define PRINT_SIZE 10
 
 void printerat(bitset_t bit_array){
-    unsigned long lastprimes[PRINT_SIZE];
+    unsigned long lastprimes[PRINT_SIZE] = {0, };
     int count = 9;
     for(unsigned long i=bitset_size(bit_array)-1; i>0; i--){
         if(bitset_getbit(bit_array, i)){
@@ -26,7 +26,6 @@ void printerat(bitset_t bit_array){
 int main(){
     clock_t start = clock();
     bitset_create(bit_array, ARRAY_SIZE);
-    bitset_fill(bit_array, 1);
     eratosthenes(bit_array);
     printerat(bit_array);
     
