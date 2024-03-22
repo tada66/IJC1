@@ -36,3 +36,7 @@ error.o: error.c error.h
 # Clean target
 clean:
 	rm *.o
+
+run: all
+	./primes 
+	./primes-i
