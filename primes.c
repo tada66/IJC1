@@ -5,10 +5,10 @@
 #include <time.h>
 #include "eratosthenes.h"
 
-#define ARRAY_SIZE 13
+#define ARRAY_SIZE 666000000
 #define PRINT_SIZE 10
 
-void printerat(bitset_t bit_array){
+void printerat(bitset_t bit_array){ //Prints the last PRINT_SIZE prime numbers calculated by eratosthenes algorithm 
     unsigned long lastprimes[PRINT_SIZE] = {0, };
     int count = 9;
     for(unsigned long i=bitset_size(bit_array)-1; i>0; i--){
@@ -24,7 +24,8 @@ void printerat(bitset_t bit_array){
 }
 
 int main(){
-    clock_t start = clock();
+    clock_t start = clock();    //Starts the clock
+
     bitset_create(bit_array, ARRAY_SIZE);
     eratosthenes(bit_array);
     printerat(bit_array);
