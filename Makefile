@@ -42,5 +42,5 @@ clean:
 	rm *.o
 
 run: all
-	./primes 
-	./primes-i
+	ulimit -s 100000 && ./primes 
+	ulimit -s 100000 && ./primes-i
