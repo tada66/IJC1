@@ -3,8 +3,8 @@
 # Autor: Tadeáš Horák, FIT
 # Přeloženo: gcc 11.4.0
 CC=gcc
-CFLAGS=-g -std=c11 -pedantic -Wall -Wextra -fsanitize=address
-LDFLAGS=-g -std=c11 -pedantic -Wall -Wextra -lm -fsanitize=address
+CFLAGS=-g -std=c11 -pedantic -Wall -Wextra -O2 -fsanitize=address
+LDFLAGS=-g -std=c11 -pedantic -Wall -Wextra -O2 -fsanitize=address
 
 #SRCS = $(wildcard *.c)
 #OBJS = $(SRCS:.c=.o)
@@ -13,16 +13,16 @@ LDFLAGS=-g -std=c11 -pedantic -Wall -Wextra -lm -fsanitize=address
 all: primes primes-i
 
 primes: primes.o eratosthenes.o error.o
-	$(CC) $(LDFLAGS) -o $@ $^
+	$(CC) $(LDFLAGS) -o $@ $^ -lm
 
 primes-i: primes-i.o eratosthenes-i.o error.o
-	$(CC) $(LDFLAGS) -DUSE_INLINE -o $@ $^
+	$(CC) $(LDFLAGS) -DUSE_INLINE -o $@ $^ -lm
 
 primes-i.o: primes.c bitset.h eratosthenes.h
-	$(CC) $(CFLAGS) -c -o $@ primes.c -DUSE_INLINE
+	$(CC) $(CFLAGS) -DUSE_INLINE -c -o $@ primes.c
 
 eratosthenes-i.o: eratosthenes.c eratosthenes.h bitset.h
-	$(CC) $(CFLAGS) -c -o $@ eratosthenes.c -DUSE_INLINE
+	$(CC) $(CFLAGS) -DUSE_INLINE -c -o $@ eratosthenes.c
 
 primes.o: primes.c bitset.h eratosthenes.h
 	$(CC) $(CFLAGS) -c -o $@ primes.c
