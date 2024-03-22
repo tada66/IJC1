@@ -38,14 +38,17 @@ error.o: error.c error.h
 #	$(CC) $(CFLAGS) $(OBJS) -o $(EXEC)
 
 # Clean target
+.PHONY: clean
 clean:
 	rm *.o
 
+.PHONY: run
 run: all
 	ulimit -s 100000 && ./primes 
 	ulimit -s 100000 && ./primes-i
 	make clean
 
+.PHONY: zip
 zip: all
 	zip xhorakt00.zip *.c *.h Makefile
 	make clean
