@@ -1,17 +1,42 @@
 #include <stdio.h>
 
-#include "error.c"
-//ja jsem komentar
-int main(int argc, char **argv){ "//ja nejsem komentar"
-    if(argc>2)/* TADY JE DALSI KOMENTAR
-        error_exit("Too many arguments!\n"); A TADY KONCI */
-    FILE *file;
-    if(argc==2)'/'/taky nejsem komentar
-        file = fopen(argv[1], "r");
-    else
-        file = stdin;// \
-    if(file==NULL)
-        error_exit("Cannot open file %s", argv[1]);
-    int state = 0;
-    int c;
-    while ((c=getc(file)) != EOF)
+#define KOTESENI /* Block comment in the middle of macro definition */ 42
+
+int main(){
+    /*
+            Multi
+                    Line
+        Block
+                Comment
+    
+    */
+
+    char *comment = "/* This is not a block comment */";
+    char *string = "// This is not a line comment";
+
+    /* Random block comment */
+    char a = 'a'; // This is a line comment with escape sequences: \t \r \n
+    char b = 'b';
+    char c = '/'; // The line below should be treated as a comment \
+    char d = 'd';
+
+    /* Line comment inside // of block comment */
+
+    // Line \
+    comment \
+    that \
+    continues \
+    on \
+    different \
+    lines
+
+    char d = '\\';
+    char e = '\'';
+
+    /* This is a block comment with escape sequences: \t \r \n*/
+
+    char *string2 = "/***/";
+    char *string3 = "text\"//text\'\"\\";
+
+    return 0;
+}
