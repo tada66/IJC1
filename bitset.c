@@ -2,7 +2,7 @@
 // Řešení IJC-DU1, příklad a), 20.3.2024
 // Autor: Tadeáš Horák, FIT
 // Přeloženo: gcc 11.4.0
-// Inline function prototypes for bitset.h, needed for successful linking
+// Prototypy inline funkcí v bitset.h
 #include "bitset.h"
 
 #ifdef USE_INLINE

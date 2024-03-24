@@ -2,6 +2,7 @@
 // Řešení IJC-DU1, příklad a), 21.3.2024
 // Autor: Tadeáš Horák, FIT
 // Přeloženo: gcc 11.4.0
+// Výpočet 10 největších prvočísel až po 666 000 000 díky algoritmu Eratosthenovo síto
 #include <time.h>
 #include "eratosthenes.h"
 

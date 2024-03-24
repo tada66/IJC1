@@ -2,6 +2,8 @@
 # Řešení IJC-DU1, příklad a), 22.3.2024
 # Autor: Tadeáš Horák, FIT
 # Přeloženo: gcc 11.4.0
+# Vytvoření spustitelných binárních souborů primes, primes-i a no-comment
+# primes-i využívá inline funkce místo maker
 CC=gcc
 CFLAGS=-g -std=c11 -pedantic -Wall -Wextra -O2
 LDFLAGS=-g -std=c11 -pedantic -Wall -Wextra -O2
