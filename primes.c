@@ -28,7 +28,7 @@ int main(){
     clock_t start = clock();    //Starts the clock
 
     bitset_create(bit_array, ARRAY_SIZE);
-    eratosthenes(bit_array);
+    eratosthenes(bit_array);    //Calculate primes
     printerat(bit_array);
     
     fprintf(stderr, "Time=%.3g\n", (double)(clock()-start)/CLOCKS_PER_SEC);
