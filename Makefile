@@ -46,10 +46,11 @@ error.o: error.c error.h
 clean:
 	rm -f *.o
 
+#we need at least 84 000-ish on stack just to fit the bit array, setting it to 90 000 just so there is a little reserve
 .PHONY: run
 run: all
-	ulimit -s 100000 && ./primes 
-	ulimit -s 100000 && ./primes-i
+	ulimit -s 90000 && ./primes 
+	ulimit -s 90000 && ./primes-i
 
 .PHONY: zip
 zip: all

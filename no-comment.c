@@ -63,7 +63,7 @@ int main(int argc, char **argv){
                 break;
         }
     }
-    fclose(file);   //close file so dont have a memory leak
-    if(state!=0)    //If we haven't returned to default state the file contains unclosed comment or quotes
+    fclose(file);   //close the file so dont have a memory leak
+    if(state!=0)    //If we haven't returned to default state the file contains unclosed an comment or quote
         error_exit("Stavový automat skončil ve stavu %d! Neobsahuje soubor nezakončený komentář?\n", state);
 }

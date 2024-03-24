@@ -7,11 +7,11 @@
 #include "eratosthenes.h"
 
 #define ARRAY_SIZE 666000000
-#define PRINT_SIZE 10
+#define PRINT_SIZE 10   //How many prime numbers will be printed to stdout
 
 void printerat(bitset_t bit_array){ //Prints the last PRINT_SIZE prime numbers calculated by eratosthenes algorithm 
     unsigned long lastprimes[PRINT_SIZE] = {0, };
-    int count = 9;
+    int count = PRINT_SIZE-1;
     for(unsigned long i=bitset_size(bit_array)-1; i>0; i--){
         if(bitset_getbit(bit_array, i)){
             lastprimes[count] = i;
@@ -21,7 +21,8 @@ void printerat(bitset_t bit_array){ //Prints the last PRINT_SIZE prime numbers c
         }
     }
     for(int i=0; i<PRINT_SIZE; i++)
-        printf("%ld\n", lastprimes[i]);
+        if(lastprimes[i]!=0)
+            printf("%ld\n", lastprimes[i]);
 }
 
 int main(){
