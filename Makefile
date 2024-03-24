@@ -6,11 +6,7 @@
 # primes-i využívá inline funkce místo maker
 CC=gcc
 CFLAGS=-g -std=c11 -pedantic -Wall -Wextra -O2
-LDFLAGS=-g -std=c11 -pedantic -Wall -Wextra -O2
-
-#SRCS = $(wildcard *.c)
-#OBJS = $(SRCS:.c=.o)
-#EXEC = main
+LDFLAGS=-g -std=c11 -pedantic -Wall -Wextra -O2	#-02 for optimalization, roughly halves the execute time
 
 all: primes primes-i no-comment
 
@@ -54,7 +50,6 @@ clean:
 run: all
 	ulimit -s 100000 && ./primes 
 	ulimit -s 100000 && ./primes-i
-	make clean
 
 .PHONY: zip
 zip: all
